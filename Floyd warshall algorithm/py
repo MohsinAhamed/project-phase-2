@@ -1,0 +1,28 @@
+nV = 4
+
+INF = 999
+
+def floyd_warshall(G):
+    distance = list(map(lambda m: list(map(lambda z: z, m)), G))
+
+    for k in range(nV):
+        for m in range(nV):
+            for z in range(nV):
+                distance[m][z] = min(distance[m][z], distance[m][k] + distance[k][z])
+    print_solution(distance)
+
+def print_solution(distance):
+    for m in range(nV):
+        for z in range(nV):
+            if(distance[m][z] == INF):
+                print("INF", end=" ")
+            else:
+                print(distance[m][z], end="  ")
+        print(" ")
+
+
+G = [[0, 3, INF, 5],
+         [2, 0, INF, 4],
+         [INF, 1, 0, INF],
+         [INF, INF, 2, 0]]
+floyd_warshall(G)
